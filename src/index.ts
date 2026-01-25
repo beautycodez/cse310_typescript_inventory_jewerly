@@ -38,10 +38,25 @@ const data = await loadInventory();
 //inventory.push(data[1]);
 console.log("Inventario cargado:", data);
 
-inventory.forEach((ring, index) => {
-  console.log(`${index + 1}. ${ring.name} - Precio base: $${ring.price}, Precio final: $${ring.getFinalPrice()}`);
-})
+//inventory.forEach((ring, index) => {
+  //console.log(`${index + 1}. ${ring.name} - Precio base: $${ring.price}, Precio final: $${ring.getFinalPrice()}`);
+//})
 // ---------------------------------------------------------
 
+function addJewel(jewel: Jewel) {
+  if (jewel.price <= 0) {
+    throw new Error("El precio debe ser mayor a 0");
+  }
+  inventory.push(jewel);
+  console.log("The new Jewel was added successfully")
+  inventory.forEach((ring, index) => {
+  console.log(`${index + 1}. ${ring.name} - Precio base: $${ring.price}, Precio final: $${ring.getFinalPrice()}`);
+});
+}
 
+try {
+  addJewel(new Ring("Anillo inválido", -10));
+} catch (error) {
+  console.error("❌ Error:", (error as Error).message);
+}
 
